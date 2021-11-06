@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div>
+                    <button id="botton" type="submit" onclick="validacion()">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        // Escríbe aquí tu código
+        let form = document.getElementById('formulario');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let nombre_it = document.getElementById("nombre").value;
+            let asunto_it = document.getElementById("asunto").value;
+            let mensaje_it = document.getElementById("mensaje").value;
+
+            let resultado = validacion(nombre_it, asunto_it, mensaje_it);
+
+            if(resultado){
+                document.querySelector('.resultado').innerHTML = "Mensaje enviado con éxito"
+
+            }
+            else{
+                document.querySelector('.resultado').innerHTML = "";
+            }
+
+        });
+
+
+        const validacion = (nombre_it, asunto_it, mensaje_it) => {
+
+
+            let valido=true;
+            let rgx =  /^[a-zA-Z ]*$/;
+
+            // validar el nombre
+            if (rgx.test(nombre_it) == false||nombre_it === "") {
+                valido=false;
+                document.querySelector(".errorNombre").innerHTML = "El nombre no es válido y no debe contener números";
+            }else{
+                document.querySelector(".errorNombre").innerHTML = "";
+            }
+
+            // validar el asunto
+            if (rgx.test(asunto_it) == false||asunto_it === "") {
+                valido=false;
+                document.querySelector(".errorAsunto").innerHTML = "El asunto no es válido y no debe contener números";
+            }
+            else{
+                document.querySelector(".errorAsunto").innerHTML = "";
+            }
+
+            // validar el mensaje
+            if (rgx.test(mensaje_it) == false||mensaje_it === "") {
+                valido=false;
+                document.querySelector(".errorMensaje").innerHTML = "El mensaje no es válido y no debe contener números";
+            }else{
+                document.querySelector(".errorMensaje").innerHTML = "";
+            }
+
+            return valido;
+        }
+            
+
+    </script>
+</body>
+
+</html>
